@@ -38,7 +38,7 @@ DECLARE
 BEGIN
   old_salary := :OLD.salary;
   new_salary := :NEW.salary;
-  IF v_old_salary <> v_new_salary THEN
+  IF old_salary <> new_salary THEN
     INSERT INTO sal_log1(empid, empname, old_salary, new_salary, update_date)
     VALUES(:OLD.empid, :OLD.empname, old_salary, new_salary, SYSDATE);
   END IF;
