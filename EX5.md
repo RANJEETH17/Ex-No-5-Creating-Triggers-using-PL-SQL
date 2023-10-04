@@ -33,14 +33,14 @@ CREATE OR REPLACE TRIGGER log_salary1_update
 BEFORE UPDATE ON emp2
 FOR EACH ROW
 DECLARE
-  v_old_salary NUMBER;
-  v_new_salary NUMBER;
+  old_salary NUMBER;
+  new_salary NUMBER;
 BEGIN
-  v_old_salary := :OLD.salary;
-  v_new_salary := :NEW.salary;
+  old_salary := :OLD.salary;
+  new_salary := :NEW.salary;
   IF v_old_salary <> v_new_salary THEN
     INSERT INTO sal_log1(empid, empname, old_salary, new_salary, update_date)
-    VALUES(:OLD.empid, :OLD.empname, v_old_salary, v_new_salary, SYSDATE);
+    VALUES(:OLD.empid, :OLD.empname, old_salary, new_salary, SYSDATE);
   END IF;
 END;
 /
